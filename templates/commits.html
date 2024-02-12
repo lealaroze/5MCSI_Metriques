@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Metrique</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+   <body style="background-color: #DFF2FF; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+    <div id="chart_div" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  width: 80vw; height: 65vh;"></div>
+  
+  <body>
+    <div id="chart_div"></div>
+<script>
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawCommitsChart);
+
+  function drawCommitsChart() {
+    fetch('/commits/')
+      .then(response => response.json())
+      .then(data => {
+        drawChart(data, 'Évolution du nombre de commits');
+      });
+  }
+
+  function drawChart(data, title) {
+    var dataArray = [['Date', 'Commits']];
+    
+    data.results.forEach(entry => {
+      var date = new Date(entry[0]);
+      dataArray.push([date.toLocaleDateString(), entry[1]]);
+    });
+
+    var dataTable = google.visualization.arrayToDataTable(dataArray);
+
+    var options = {
+      title: title,
+      legend: {position: 'none'},
+      hAxis: {title: 'Date'},
+      vAxis: {title: 'Commits'},
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(dataTable, options);
+  }
+</script>
+
+
+
+  </body>
+</html>
