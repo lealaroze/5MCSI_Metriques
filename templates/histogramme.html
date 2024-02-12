@@ -1,1 +1,29 @@
+<script>
+  google.charts.load('current', { packages: ['corechart'] });
+  google.charts.setOnLoadCallback(drawHistogramme);
+  
+  function drawHistogramme() {
+    fetch('/paris/')  // Fait une requête à votre API /paris/
+      .then(response => response.json())
+      .then(data => {
+        // Convertir les données récupérées en un tableau utilisable par Google Charts
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Jour');
+        dataTable.addColumn('number', 'Température');
 
+        data.results.forEach(entry => {
+          dataTable.addRow([entry.Jour, entry.temp]);
+        });
+
+        // Configurer les options de l'histogramme
+        var options = {
+          title: 'Histogramme des températures de Paris pour les 16 prochains jours',
+          legend: { position: 'none' }
+        };
+
+        // Dessiner l'histogramme
+        var histogramme = new google.visualization.ColumnChart(document.getElementById('histogramme_div'));
+        histogramme.draw(dataTable, options);
+      });
+  }
+</script>
