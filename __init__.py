@@ -25,7 +25,7 @@ def meteo():
         dt_value = list_element.get('dt')
         temp_day_value = list_element.get('temp', {}).get('day') - 273.15 # Conversion de Kelvin en °c 
         results.append({'Jour': dt_value, 'temp': temp_day_value})
-    return jsonify(results=results) #add exercise 3
+    return jsonify(results=results)
 
 @app.route("/rapport/")
 def mongraphique():
