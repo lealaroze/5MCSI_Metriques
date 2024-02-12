@@ -1,29 +1,43 @@
-<script>
-  google.charts.load('current', { packages: ['corechart'] });
-  google.charts.setOnLoadCallback(drawHistogramme);
-  
-  function drawHistogramme() {
-    fetch('/paris/')  // Fait une requête à votre API /paris/
-      .then(response => response.json())
-      .then(data => {
-        // Convertir les données récupérées en un tableau utilisable par Google Charts
-        var dataTable = new google.visualization.DataTable();
-        dataTable.addColumn('string', 'Jour');
-        dataTable.addColumn('number', 'Température');
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Histogramme</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <div id="histogramme_div"></div>
+    <script>
+      // Chargement de la bibliothèque Google Charts
+      google.charts.load('current', { packages: ['corechart'] });
 
-        data.results.forEach(entry => {
-          dataTable.addRow([entry.Jour, entry.temp]);
-        });
+      // Fonction appelée lorsque la bibliothèque est chargée
+      google.charts.setOnLoadCallback(drawHistogramme);
 
-        // Configurer les options de l'histogramme
-        var options = {
-          title: 'Histogramme des températures de Paris pour les 16 prochains jours',
-          legend: { position: 'none' }
-        };
+      // Fonction pour dessiner l'histogramme
+      function drawHistogramme() {
+        fetch('/paris/')  // Fait une requête à votre API /paris/
+          .then(response => response.json())
+          .then(data => {
+            // Convertir les données récupérées en un tableau utilisable par Google Charts
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Jour');
+            dataTable.addColumn('number', 'Température');
 
-        // Dessiner l'histogramme
-        var histogramme = new google.visualization.ColumnChart(document.getElementById('histogramme_div'));
-        histogramme.draw(dataTable, options);
-      });
-  }
-</script>
+            data.results.forEach(entry => {
+              dataTable.addRow([entry.Jour.toString(), entry.temp]);
+            });
+
+            // Configurer les options de l'histogramme
+            var options = {
+              title: 'Histogramme des températures de Paris pour les 16 prochains jours',
+              legend: { position: 'none' }
+            };
+
+            // Dessiner l'histogramme
+            var histogramme = new google.visualization.ColumnChart(document.getElementById('histogramme_div'));
+            histogramme.draw(dataTable, options);
+          });
+      }
+    </script>
+  </body>
+</html>
