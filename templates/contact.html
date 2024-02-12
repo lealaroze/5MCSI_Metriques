@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactez-moi</title>
+    <title>Contactez-nous</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('https://www.fond-ecran-hd.net/Public/uploads/2019-01-13/thumbs-1/1330.jpg') center/cover no-repeat fixed; /* Ajout de 'fixed' */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden; /* Ajout pour masquer le défilement vertical */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px #00FFFF;
         }
-
         .container {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
@@ -26,19 +18,21 @@
             max-width: 400px;
             width: 100%;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
+        h1 {
+            color: #FFFF00;
+            text-align: center;
         }
-
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
         input, textarea {
             width: calc(100% - 16px);
             padding: 8px;
             margin-bottom: 16px;
             box-sizing: border-box;
         }
-
         button {
             background-color: #008080;
             color: #fff;
@@ -47,10 +41,15 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        body {
+          background-image: url('https://media.tenor.com/CntwAJzd7gUAAAAM/crazy-frog.gif');
+          background-size: cover; /* Couvre tout l'espace disponible */
+          background-position: center; /* Centre l'image */
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1 style="color: #008080;">Me contacter</h1>
 
@@ -67,6 +66,5 @@
             <button type="submit">Envoyer</button>
         </form>
     </div>
-
 </body>
 </html>
